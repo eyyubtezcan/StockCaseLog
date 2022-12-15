@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domains\BoatDomain.cs" />
+    <Compile Remove="Domains\BusDomain.cs" />
+    <Compile Remove="Entities\Boat.cs" />
+    <Compile Remove="Entities\Bus.cs" />
+    <Compile Remove="Entities\ProductCategory.cs" />
+    <Compile Remove="Entities\User.cs" />
+  </ItemGroup>
+
+</Project>

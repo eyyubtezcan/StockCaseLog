@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\bin\Debug\net6.0\StockCaseProject.Domain.deps.json
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\bin\Debug\net6.0\StockCaseProject.Domain.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\bin\Debug\net6.0\StockCaseProject.Domain.pdb
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.csproj.AssemblyReference.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\refint\StockCaseProject.Domain.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\StockCaseProject.Domain.pdb
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Domain\obj\Debug\net6.0\ref\StockCaseProject.Domain.dll

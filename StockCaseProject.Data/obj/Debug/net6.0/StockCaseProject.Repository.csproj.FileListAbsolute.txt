@@ -1,0 +1,17 @@
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.csproj.AssemblyReference.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\bin\Debug\net6.0\StockCaseProject.Repository.deps.json
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\bin\Debug\net6.0\StockCaseProject.Repository.runtimeconfig.json
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\bin\Debug\net6.0\StockCaseProject.Repository.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\bin\Debug\net6.0\StockCaseProject.Repository.pdb
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\bin\Debug\net6.0\StockCaseProject.Domain.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\bin\Debug\net6.0\StockCaseProject.Domain.pdb
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.csproj.CopyComplete
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\refint\StockCaseProject.Repository.dll
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.pdb
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\StockCaseProject.Repository.genruntimeconfig.cache
+C:\Users\Administrator\Desktop\StockCaseProjectRepository-master\StockCaseProject.Data\obj\Debug\net6.0\ref\StockCaseProject.Repository.dll

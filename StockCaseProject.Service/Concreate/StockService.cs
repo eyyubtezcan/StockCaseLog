@@ -34,6 +34,15 @@ namespace StockCaseProject.Service.Concreate
             return stockVariant1;
         }
 
+        public void UpdateCustomersVariantDelete(string variantCode)
+        {
+            var stockVariant = _repository.GetAllAsync();
+
+            var stockVariant1 = stockVariant.Result.Where(x => x.VariantCode == variantCode).ToList();
+
+            _repository.RemoveRange(stockVariant1);
+        }
+
         public List<Stock> UpdateCustomersVariantStock(string variantCode, int quantity)
         {
             var stockList = this.GetAllAsync().Result.Where(x => x.VariantCode == variantCode).ToList();

@@ -12,5 +12,6 @@ namespace StockCaseProject.Service.Abstract
         public List<Stock> GetAllVariantCodeAsync(string variantCode);
         public List<Stock> GetAllProductCodeAsync(string productCode);
         public List<Stock> UpdateCustomersVariantStock(string variantCode, int quantity);
+        public void UpdateCustomersVariantDelete(string variantCode);
     }
 }

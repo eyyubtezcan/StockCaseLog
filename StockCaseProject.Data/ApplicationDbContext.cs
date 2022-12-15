@@ -46,11 +46,84 @@ namespace StockCaseProject.Repository
                         var originalValue = change.OriginalValues[prop.Name].ToString();
                         var currentValue = change.CurrentValues[prop.Name].ToString();
 
+                        //if (originalValue != currentValue) //Sadece Değişen kayıt Log'a atılır.
+                        //{
+                            ChangeLog log = new ChangeLog()
+                            {
+                                UserName = "deneme@deneme.com",
+                                EntityName = entityName,
+                                PrimaryKeyValue = int.Parse(change.OriginalValues[PrimaryKey].ToString()),
+                                PropertyName = prop.Name,
+                                OldValue = originalValue,
+                                NewValue = currentValue,
+                                DateChanged = now,
+                                //State = EnumState.Update
+                            };
+                            //Değişen kayıt Log'u ElasticSearch'e atılır.
+                            // ElasticSearch.CheckExistsAndInsert(log);
+
+                            if (change.State != EntityState.Unchanged)
+                            {
+                                if (change.State == EntityState.Deleted)
+                                {
+                                    log.State = EnumState.Delete;
+                                }
+                                else if (change.State == EntityState.Modified)
+                                {
+                                    log.State = EnumState.Update;
+                                }
+                                else if (change.State == EntityState.Added)
+                                {
+                                    log.State = EnumState.Added;
+                                }
+                                //else if (change.State == EntityState.Unchanged)
+                                //{
+                                //    log.State = EnumState.Delete;
+                                //}
+                                ChangeLogs.Add(log);
+
+                          // }
+
+                        }
+                    }
+
+                }
+                return base.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                return 0;
+            }
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+
+                var modifiedEntities = ChangeTracker.Entries();
+                //   .Where(p => p.State == EntityState.Modified).ToList();
+                var now = System.DateTime.UtcNow;
+
+
+                foreach (var change in modifiedEntities)
+                {
+                    var entityName = change.Entity.GetType().Name;
+
+                    var PrimaryKey = change.OriginalValues.Properties.FirstOrDefault(prop => prop.IsPrimaryKey() == true).Name;
+
+                    foreach (IProperty prop in change.OriginalValues.Properties)
+                    {
+
+                        var originalValue = change.OriginalValues[prop.Name].ToString();
+                        var currentValue = change.CurrentValues[prop.Name].ToString();
+
                         if (originalValue != currentValue) //Sadece Değişen kayıt Log'a atılır.
                         {
                             ChangeLog log = new ChangeLog()
                             {
-                                UserName = ClaimTypes.Email,
+                                UserName = "deneme@deneme.com",
                                 EntityName = entityName,
                                 PrimaryKeyValue = int.Parse(change.OriginalValues[PrimaryKey].ToString()),
                                 PropertyName = prop.Name,
@@ -88,15 +161,15 @@ namespace StockCaseProject.Repository
                     }
 
                 }
-                return base.SaveChanges();
+                return await base.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 var error = ex.Message;
-                return 0;
+                return await base.SaveChangesAsync();
             }
         }
-       
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

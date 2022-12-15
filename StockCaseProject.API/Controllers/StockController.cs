@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StockCaseProject.Domain.Entities;
 using StockCaseProject.Service.Abstract;
+using System.Security.Claims;
 
 namespace StockCaseProject.API.Controllers
 {
@@ -14,6 +15,7 @@ namespace StockCaseProject.API.Controllers
         public StockController(IStockService service)
         {
             _service = service;
+
         }
             
         
@@ -32,6 +34,14 @@ namespace StockCaseProject.API.Controllers
             var result = _service.UpdateCustomersVariantStock(variantCode, quantity);
 
             return await Task.FromResult(result);
+
+        }
+        [HttpDelete("{variantCode}")]
+        public async Task UpdateCustomersVariantDelete(string variantCode)
+        {
+             _service.UpdateCustomersVariantDelete(variantCode);
+
+             await Task.CompletedTask;
 
         }
 

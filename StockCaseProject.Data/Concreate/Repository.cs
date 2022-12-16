@@ -27,7 +27,7 @@ namespace StockCaseProject.Repository.Concreate
         public  Task AddAsync(T entity)
         {
              _dbSet.AddAsync(entity);
-
+            _context.loglaaaa();
             _context.SaveChanges();
             return Task.CompletedTask;
         }
@@ -35,7 +35,8 @@ namespace StockCaseProject.Repository.Concreate
         public  Task AddRangeAsync(IEnumerable<T> entities)
         {
              _dbSet.AddRangeAsync(entities);
-             _context.SaveChanges();
+            _context.loglaaaa(); 
+            _context.SaveChanges();
             return Task.CompletedTask;
         }
 
@@ -53,12 +54,14 @@ namespace StockCaseProject.Repository.Concreate
         public void Remove(T entity)
         {
             _dbSet.Remove(entity);
+            _context.loglaaaa();
             _context.SaveChanges();
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
+            _context.loglaaaa();
             _context.SaveChanges();
         }
 
@@ -67,10 +70,11 @@ namespace StockCaseProject.Repository.Concreate
             return await _dbSet.AnyAsync(expression);
         }
 
-        public async void  Update(T entity)
+        public  void  Update(T entity)
         {
              _dbSet.Update(entity);
-          await _context.SaveChangesAsync(default);
+            _context.loglaaaa();
+             _context.SaveChanges();
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)

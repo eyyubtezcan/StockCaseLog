@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\StockCaseProject.API",
+    "\\StockCaseProject.Core",
+    "\\StockCaseProject.Data",
+    "\\StockCaseProject.Data\\Concreate",
+    "\\StockCaseProject.Domain",
+    "\\StockCaseProject.Service",
+    "\\StockCaseProject.Service\\Concreate"
   ],
+  "SelectedNode": "\\StockCaseProject.API",
   "PreviewInSolutionExplorer": false
 }

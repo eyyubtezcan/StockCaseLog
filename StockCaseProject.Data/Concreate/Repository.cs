@@ -27,7 +27,7 @@ namespace StockCaseProject.Repository.Concreate
         public  Task AddAsync(T entity)
         {
              _dbSet.AddAsync(entity);
-            _context.loglaaaa();
+           
             _context.SaveChanges();
             return Task.CompletedTask;
         }
@@ -35,7 +35,7 @@ namespace StockCaseProject.Repository.Concreate
         public  Task AddRangeAsync(IEnumerable<T> entities)
         {
              _dbSet.AddRangeAsync(entities);
-            _context.loglaaaa(); 
+           
             _context.SaveChanges();
             return Task.CompletedTask;
         }
@@ -54,14 +54,14 @@ namespace StockCaseProject.Repository.Concreate
         public void Remove(T entity)
         {
             _dbSet.Remove(entity);
-            _context.loglaaaa();
+           
             _context.SaveChanges();
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
-            _context.loglaaaa();
+           
             _context.SaveChanges();
         }
 
@@ -73,7 +73,7 @@ namespace StockCaseProject.Repository.Concreate
         public  void  Update(T entity)
         {
              _dbSet.Update(entity);
-            _context.loglaaaa();
+          
              _context.SaveChanges();
         }
 

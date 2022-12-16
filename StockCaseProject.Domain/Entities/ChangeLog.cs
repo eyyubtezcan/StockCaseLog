@@ -19,6 +19,9 @@ namespace StockCaseProject.Domain.Entities
         public EnumState State { get; set; }
     }
 
+
+
+
     public enum EnumState
     {
         Update = 1,

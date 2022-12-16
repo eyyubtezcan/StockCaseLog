@@ -127,14 +127,14 @@ namespace StockCaseProject.Repository
                             DateChanged = now,
                             //State = EnumState.Update
                         };
-                        //Değişen kayıt Log'u ElasticSearch'e atılır.
-                        // ElasticSearch.CheckExistsAndInsert(log);
+                       
 
                         if (change.State != EntityState.Unchanged)
                         {
                             if (change.State == EntityState.Deleted)
                             {
                                 log.State = EnumState.Delete;
+                                log.NewValue = "{}";
                             }
                             else if (change.State == EntityState.Modified)
                             {
@@ -142,12 +142,9 @@ namespace StockCaseProject.Repository
                             }
                             else if (change.State == EntityState.Added)
                             {
+                                log.OldValue = "{}";
                                 log.State = EnumState.Added;
                             }
-                            //else if (change.State == EntityState.Unchanged)
-                            //{
-                            //    log.State = EnumState.Delete;
-                            //}
                             ChangeLogs.Add(log);
 
                              }

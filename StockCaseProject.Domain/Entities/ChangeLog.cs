@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace StockCaseProject.Domain.Entities
 {
-    public class ChangeLog : BaseEntity
+    public class ChangeLog 
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string EntityName { get; set; }
         public string PropertyName { get; set; }

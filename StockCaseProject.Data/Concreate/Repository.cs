@@ -28,15 +28,15 @@ namespace StockCaseProject.Repository.Concreate
         {
              _dbSet.AddAsync(entity);
            
-            _context.SaveChanges();
+            _context.SaveChangesAsync(); 
             return Task.CompletedTask;
         }
 
         public  Task AddRangeAsync(IEnumerable<T> entities)
         {
              _dbSet.AddRangeAsync(entities);
-           
-            _context.SaveChanges();
+
+            _context.SaveChangesAsync();
             return Task.CompletedTask;
         }
 
@@ -54,15 +54,15 @@ namespace StockCaseProject.Repository.Concreate
         public void Remove(T entity)
         {
             _dbSet.Remove(entity);
-           
-            _context.SaveChanges();
+
+            _context.SaveChangesAsync();
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
-           
-            _context.SaveChanges();
+
+            _context.SaveChangesAsync();
         }
 
         public async Task<bool> SingleOrDefaultAsync(Expression<Func<T, bool>> expression)
@@ -73,8 +73,8 @@ namespace StockCaseProject.Repository.Concreate
         public  void  Update(T entity)
         {
              _dbSet.Update(entity);
-          
-             _context.SaveChanges();
+
+            _context.SaveChangesAsync();
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)

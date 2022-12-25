@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using StockCaseProject.Domain.Entities;
 using StockCaseProject.Repository.Seeds;
@@ -19,177 +21,20 @@ namespace StockCaseProject.Repository
 
     public class ApplicationDbContext: DbContext
     {
-        public ApplicationDbContext(DbContextOptions options) : base
+        
+        private LoggingSavingChangesInterceptor _interceptors;
+
+        public ApplicationDbContext(DbContextOptions options, LoggingSavingChangesInterceptor interceptors) : base
            (options)
         {
-           
+            //_httpContextAccessor = httpContextAccessor;
+            this._interceptors = interceptors;
         }
-        private static readonly TaggedQueryCommandInterceptor _interceptor
-       = new TaggedQueryCommandInterceptor();
-        
-
 
         //public ApplicationDbContext()
         //{
-
         //}
-
      
-        public void jsonloglaaaa()
-        {
-            //Değişiklik olmayan kayıtları alıyoruz.
-            var modifiedEntities = ChangeTracker.Entries()
-               .Where(p => p.State != EntityState.Unchanged).ToList();
-            var now = System.DateTime.UtcNow;
-
-
-            foreach (var change in modifiedEntities)
-            {
-                var entityName = change.Entity.GetType().Name;
-
-                var PrimaryKey = change.OriginalValues.Properties.FirstOrDefault(prop => prop.IsPrimaryKey() == true).Name;
-
-                StringBuilder jsonEntityOriginalValues = new StringBuilder();
-                StringBuilder jsonEntityCurrentValues = new StringBuilder();
-                jsonEntityOriginalValues.Append("{\"" + entityName + "\":{");
-                jsonEntityCurrentValues.Append("{\"" + entityName + "\":{");
-
-                foreach (IProperty prop in change.OriginalValues.Properties)
-                {
-
-                    var originalValue = change.OriginalValues[prop.Name];
-                    var currentValue = change.CurrentValues[prop.Name];
-
-                    jsonEntityOriginalValues.Append(prop.Name + ":{\"" + originalValue + "\"}");
-                    jsonEntityCurrentValues.Append(prop.Name + ":{\"" + currentValue + "\"}");
-
-                }
-                jsonEntityOriginalValues.Append("}}");
-                jsonEntityCurrentValues.Append("}}");
-              //  if (jsonEntityOriginalValues != jsonEntityCurrentValues) //Sadece Değişen kayıt Log'a atılır.
-                //{
-                    ChangeLog log = new ChangeLog()
-                    {
-                        UserName = "muhittin@deneme.com",
-                        EntityName = entityName,
-                        PrimaryKeyValue = int.Parse(change.OriginalValues[PrimaryKey].ToString()),
-                        PropertyName = "",
-                        OldValue = jsonEntityOriginalValues.ToString(),
-                        NewValue = jsonEntityCurrentValues.ToString(),
-                        DateChanged = now,
-                        //State = EnumState.Update
-                    };
-          
-                    if (change.State == EntityState.Deleted)
-                    {
-                        log.State = EnumState.Delete;
-                        log.NewValue = "{}";
-                    }
-                    else if (change.State == EntityState.Modified)
-                    {
-                        log.State = EnumState.Update;
-                    }
-                    else if (change.State == EntityState.Added)
-                    {
-                        log.OldValue = "{}";
-                        log.State = EnumState.Added;
-                    }
-                  
-                    ChangeLogs.Add(log);
-                                       
-                //}
-
-            }
-
-          
-        }
-        public void loglaaaa()
-        {
-            //try
-            //{
-
-                var modifiedEntities = ChangeTracker.Entries()
-                   .Where(p => p.State != EntityState.Unchanged).ToList();
-                var now = System.DateTime.UtcNow;
-
-
-                foreach (var change in modifiedEntities)
-                {
-                    var entityName = change.Entity.GetType().Name;
-
-                    var PrimaryKey = change.OriginalValues.Properties.FirstOrDefault(prop => prop.IsPrimaryKey() == true).Name;
-
-                    foreach (IProperty prop in change.OriginalValues.Properties)
-                    {
-
-                        var originalValue = change.OriginalValues[prop.Name].ToString();
-                        var currentValue = change.CurrentValues[prop.Name].ToString();
-
-                        if (originalValue != currentValue) //Sadece Değişen kayıt Log'a atılır.
-                        {
-                        ChangeLog log = new ChangeLog()
-                        {
-                            UserName = "muhittin@deneme.com",
-                            EntityName = entityName,
-                            PrimaryKeyValue = int.Parse(change.OriginalValues[PrimaryKey].ToString()),
-                            PropertyName = prop.Name,
-                            OldValue = originalValue,
-                            NewValue = currentValue,
-                            DateChanged = now,
-                            //State = EnumState.Update
-                        };
-                       
-
-                        if (change.State != EntityState.Unchanged)
-                        {
-                            if (change.State == EntityState.Deleted)
-                            {
-                                log.State = EnumState.Delete;
-                                log.NewValue = "{}";
-                            }
-                            else if (change.State == EntityState.Modified)
-                            {
-                                log.State = EnumState.Update;
-                            }
-                            else if (change.State == EntityState.Added)
-                            {
-                                log.OldValue = "{}";
-                                log.State = EnumState.Added;
-                            }
-                            ChangeLogs.Add(log);
-
-                             }
-
-                        }
-                    }
-
-                }
-               
-        //    }
-            //catch (Exception ex)
-            //{
-            //    var error = ex.Message;
-            //    //return 0;
-            //}
-        }
-
-
-
-       //public override int SaveChanges()
-       //{
-       //    jsonloglaaaa();
-       //    return  base.SaveChanges();
-       //}
-
-       //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken=default)
-       //{
-       //     jsonloglaaaa();
-       //     return await base.SaveChangesAsync(cancellationToken);
-       //}
-       
-          
-       
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -197,17 +42,23 @@ namespace StockCaseProject.Repository
             //When calling migrations, it will start
             if (!optionsBuilder.IsConfigured)
             {
-                var connStr = "Data Source=HPR480949;Initial Catalog=StockCaseProjectDb2;Persist Security Info=True;User ID=sa;Password=test123;Encrypt=false";
+                
+            
+                var connStr = "Data Source=localhost;Initial Catalog=StockCaseProjectDb2;Persist Security Info=True;User ID=sa;Password=test123;Encrypt=false";
                 optionsBuilder.UseSqlServer(connStr, opt =>
                 {
                     opt.EnableRetryOnFailure();
                 }
 
                 );
+                   optionsBuilder.AddInterceptors(_interceptors);
+
 
             }
-            optionsBuilder.AddInterceptors(new LoggingSavingChangesInterceptor());
-            //optionsBuilder.AddInterceptors(new TaggedQueryCommandInterceptor());
+            //var deneme = _httpContextAccessor?.HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Name);
+            //string a = _httpContextAccessor?.HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault().Value; ;
+            //optionsBuilder.AddInterceptors(new LoggingSavingChangesInterceptor(a));
+            ////optionsBuilder.AddInterceptors(new TaggedQueryCommandInterceptor());
         }
         //Stocks
         public DbSet<Stock> Stocks{ get; set; }

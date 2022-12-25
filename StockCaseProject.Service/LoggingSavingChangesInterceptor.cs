@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Newtonsoft.Json;
 using StockCaseProject.Domain.Entities;
+using StockCaseProject.Service.Abstract;
+using StockCaseProject.Service.Concreate;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -14,12 +16,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockCaseProject.Repository
+namespace StockCaseProject.Service
 {
-    public class LoggingSavingChangesInterceptor : SaveChangesInterceptor
+    public class aLoggingSavingChangesInterceptor : SaveChangesInterceptor
     {
         IHttpContextAccessor _httpContextAccessor;
-        public LoggingSavingChangesInterceptor(IHttpContextAccessor httpContextAccessor)
+        public aLoggingSavingChangesInterceptor(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
@@ -35,10 +37,10 @@ namespace StockCaseProject.Repository
             //Değişiklik olmayan kayıtları alıyoruz.
             var modifiedEntities = context.ChangeTracker.Entries()
                .Where(p => p.State != EntityState.Unchanged).ToList();
+   
+            
 
 
-
-            var userClaimsList = _httpContextAccessor.HttpContext.User.Claims.ToList();
             foreach (var change in modifiedEntities)
             {
                 var entityName = change.Entity.GetType().Name;
@@ -46,7 +48,7 @@ namespace StockCaseProject.Repository
                 var PrimaryKey = change.OriginalValues.Properties.FirstOrDefault(prop => prop.IsPrimaryKey() == true).Name;
 
                 Dictionary<string, object> originalValuesjson = new Dictionary<string, object>();
-                Dictionary<string, object> currentValuesjson = new Dictionary<string, object>();
+                    Dictionary<string, object> currentValuesjson = new Dictionary<string, object>();
 
 
                 ChangeLog log = new ChangeLog()
@@ -58,15 +60,15 @@ namespace StockCaseProject.Repository
                     OldValue = "",
                     NewValue = "",
                     DateChanged = DateTime.Now,
-                    State = EnumState.Update
+                    //State = EnumState.Update
                 };
 
                 if (change.State == EntityState.Deleted)
-                {
+                {                                    
 
                     foreach (IProperty prop in change.OriginalValues.Properties)
-                    {
-
+                    {                    
+                  
                         originalValuesjson.Add(prop.Name, change.OriginalValues[prop.Name].ToString());
                     }
                     log.OldValue = JsonConvert.SerializeObject(originalValuesjson);

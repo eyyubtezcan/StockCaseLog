@@ -58,5 +58,9 @@ namespace StockCaseProject.Service.Concreate
 
             return stockList;
         }
+        public string test()
+        {
+            return "deneme";
+        }
     }
 }

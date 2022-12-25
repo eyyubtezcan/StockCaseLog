@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockCaseProject.Domain.Entities;
 using StockCaseProject.Service.Abstract;
 using System.Security.Claims;
+using System.Security.Principal;
 
 namespace StockCaseProject.API.Controllers
 {
@@ -11,14 +14,36 @@ namespace StockCaseProject.API.Controllers
     public class StockController : BaseSecureController
     {
         private IStockService _service;
-
-        public StockController(IStockService service)
+        IHttpContextAccessor _httpContextAccessor;
+     
+        public StockController(IStockService service, IHttpContextAccessor httpContextAccessor)
         {
             _service = service;
 
+            _httpContextAccessor = httpContextAccessor;
+
+            // HttpContext.Items["Deneme"] = "DenemeContext";
+
         }
-            
-        
+        [HttpPost("Login")]
+        public async Task Login()
+        {
+           
+            var context = this._httpContextAccessor.HttpContext.User.Claims.ToList();
+           
+
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+{
+    new Claim(ClaimTypes.Name, "anuviswan"),}, "mock"));
+
+             _httpContextAccessor.HttpContext= new DefaultHttpContext() { User = user };
+
+
+            return;
+
+        }
+
+
         [HttpPost("Stock")]
         public async Task<IEnumerable<Stock>> GetCustomersVariantCodeStock(List<Stock> stockList)
         {

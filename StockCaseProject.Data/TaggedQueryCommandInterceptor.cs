@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace StockCaseProject.Repository
 {
     
-    public class TaggedQueryCommandInterceptor : DbCommandInterceptor
+    public class aTaggedQueryCommandInterceptor : DbCommandInterceptor
     {    
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
